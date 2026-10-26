@@ -1,0 +1,10 @@
+/vendor/
+/logs/*
+!/logs/.htaccess
+!/logs/.gitkeep
+/uploads/pod/*
+!/uploads/pod/.htaccess
+!/uploads/pod/.gitkeep
+config.local.php
+*.log
+.DS_Store

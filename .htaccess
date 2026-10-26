@@ -1,0 +1,28 @@
+# ---- RAMTHEL hardening (Apache) ----
+Options -Indexes
+
+# Block source/data/config file types from being served
+<FilesMatch "\.(sql|md|log|sh|ini|lock|json|dist|bak|inc)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Block config.php and composer files specifically
+<FilesMatch "^(config\.php|config\.local\.php|composer\.(json|lock)|\.env.*|\.git.*)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Hide dotfiles / VCS dirs
+RedirectMatch 404 /\.git
+RedirectMatch 404 /\.ht

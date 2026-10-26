@@ -1,0 +1,13 @@
+# No server-side execution in the uploads tree.
+php_flag engine off
+Options -ExecCGI -Indexes
+AddType text/plain .php .phtml .phps .php3 .php4 .php5 .php7 .phar .pht .cgi .pl .py
+<FilesMatch "\.(php|phtml|phps|php3|php4|php5|php7|phar|pht|cgi|pl|py|sh)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
